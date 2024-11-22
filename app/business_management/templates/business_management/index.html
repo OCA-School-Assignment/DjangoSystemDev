@@ -1,0 +1,48 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% tailwind_css %}
+  </head>
+  <body class="bg-gray-100">
+    {% include 'header.html' %}
+    <main class="flex items-center justify-center h-[calc(100vh-4rem)]">
+      <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+        <h1 class="text-4xl text-center mb-6">LOGIN</h1>
+        <form action="/" method="POST">
+          {% csrf_token %}
+          <p class="mb-4">
+            <label for="employee_id" class="block">従業員ID</label>
+            <!-- <input
+              type="text"
+              id="employee_id"
+              name="employee_id"
+              class="w-full p-2 border border-gray-300 rounded"
+            /> -->
+            {{ form.employee_id}}
+          </p>
+          <p class="mb-4">
+            <label for="password" class="block">パスワード</label>
+            <!-- <input
+              type="password"
+              id="password"
+              name="password"
+              class="w-full p-2 border border-gray-300 rounded"
+            /> -->
+            {{ form.password}}
+          </p>
+          <button
+          class="bg-orange-600 text-white p-2 w-full rounded hover:bg-orange-700"
+          type="submit"
+          value="Login"
+        >
+          LOGIN
+        </button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
