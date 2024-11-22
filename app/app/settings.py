@@ -55,6 +55,7 @@ LOGOUT_REDIRECT_URL=''
 
 # NPM_BIN_PATH = "/usr/local/bin/npm"
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
