@@ -4,12 +4,10 @@ from django.db import models
 
 
 class Department(models.Model):
-    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
 
     class Meta:
         db_table = 'department'
-        managed = False
 
     def __str__(self):
         return self.name
@@ -29,7 +27,6 @@ class Employee(models.Model):
 
     class Meta:
         db_table = 'employee'
-        managed = False
 
     def __str__(self):
         return self.name

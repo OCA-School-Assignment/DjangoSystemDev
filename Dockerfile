@@ -1,13 +1,13 @@
 FROM python:3.10-slim
 
 RUN apt-get update && apt-get install -y \
-    postgresql-client \
-    npm \
-    && rm -rf /var/lib/apt/lists/*
+    libpq-dev gcc postgresql-client \
+    && apt-get clean
 
 WORKDIR /code/app
 
 COPY requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /code/app

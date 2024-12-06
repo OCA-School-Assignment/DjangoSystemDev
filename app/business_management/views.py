@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib import messages
+
 # from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 from .models import Employee
 
 def index(request):
@@ -11,7 +11,6 @@ def index(request):
         if form.is_valid():
             employee_id = form.cleaned_data['employee_id']
             password = form.cleaned_data['password']
-            #カスタム認証ロジック
             try:
                 employee = Employee.objects.get(id=employee_id, password=password)
                 # ログイン成功処理
@@ -23,9 +22,11 @@ def index(request):
             except Employee.DoesNotExist:
                 messages.error(request, 'Invalid email or password')
     else:
-        form = LoginForm()
+        params = {
+            'form': LoginForm()
+        }
 
-    return render(request, 'business_management/index.html', {'form': form})
+    return render(request, 'business_management/index.html', params)
 
 
 def logout_view(request):
@@ -35,16 +36,42 @@ def logout_view(request):
 
 
 def home(request):
-    user_id = request.session.get('user_id')
+    employee_id = request.session.get('employee_id')
 
-    if user_id:
+    if employee_id:
         try:
             # データベースから再度取得
-            employee = Employee.objects.get(id=user_id)
+            employee = Employee.objects.get(id=employee_id)
             # 必要な情報をテンプレートに渡す
             return render(request, 'business_management/home.html', {'employee': employee})
         except Employee.DoesNotExist:
             messages.error(request, 'Employee not found')
             return redirect('index')
     return redirect('index')
+
+
+def register(request):
+    print('register debug')
+    params = {
+            'form': RegisterForm()
+    }
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            employee_id = form.cleaned_data['employee_id']
+            name = form.cleaned_data['name']
+            department_obj = form.cleaned_data['department_id']
+            department_id = department_obj.id
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            try:
+                employee = Employee.objects.create(id=employee_id, name=name, department_id=department_id, email=email, password=password)
+                employee.save()
+                request.session['employee_id'] = employee.id
+                # messages.success(request, f'Welcome {employee.name}')
+                return redirect('home')
+            except Exception as e:
+                messages.error(request, e)
+                return redirect('register')
+    return render(request, 'business_management/register.html', params)
 

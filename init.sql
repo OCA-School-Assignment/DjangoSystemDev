@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS department (
 );
 
 CREATE TABLE IF NOT EXISTS employee (
-    id CHAR(8),
+    id CHAR(8) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     department_id INT,
     email VARCHAR(100) NOT NULL,
@@ -37,3 +37,17 @@ VALUES
     ('A0000002', '鈴木花子', 2, 'hanako.suzuki@example.com', 'password456'),
     ('B0000001', '佐藤次郎', 3, 'jiro.sato@example.com', 'password789'),
     ('C0000001', '高橋美穂', 4, 'miho.takahashi@example.com', 'password1011');
+
+CREATE TABLE IF NOT EXISTS items (
+    id CHAR(6) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price INT NOT NULL
+);
+
+INSERT INTO items (id, name, price)
+VALUES
+    ('AA0001', 'Type-0', 100),
+    ('AA0002', 'Type-1', 200),
+    ('AB0001', 'Type-2', 50),
+    ('AC0001', 'Type-3', 10),
+    ('AC0002', 'Type-4', 500);

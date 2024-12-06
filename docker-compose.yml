@@ -1,4 +1,16 @@
 services:
+  db:
+    image: postgres:15
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: astra
+      POSTGRES_PASSWORD: astra@123
+      POSTGRES_DB: astra_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
   web:
     build: .
     volumes:
@@ -15,14 +27,5 @@ services:
       - DJANGO_DB_USER=astra
       - DJANGO_DB_PASSWORD=astra@123
 
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: astra
-      POSTGRES_PASSWORD: astra@123
-      POSTGRES_DB: astra_db
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 volumes:
   postgres_data:
