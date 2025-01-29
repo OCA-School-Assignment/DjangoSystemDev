@@ -1,4 +1,4 @@
-## Setup for Django × PostfreSQL on DevContainer
+## Setup for Django × PostgreSQL on DevContainer
 
 
 ### Prerequisites
