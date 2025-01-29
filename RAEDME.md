@@ -16,6 +16,7 @@
 2. Search and install:
     - **Python** 
     - **Python Debugger**
+
 ※ You might need to reload the window
 
 
