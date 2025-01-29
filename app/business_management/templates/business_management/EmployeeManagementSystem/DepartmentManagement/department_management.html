@@ -1,0 +1,68 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Management</title>
+    {% tailwind_css %}
+</head>
+<body>
+{% include 'header.html' %}
+    <div class="container mx-auto px-4">
+        <h1 class="text-2xl font-bold mb-6 text-center">部署一覧</h1>
+        <div class="mb-4 text-center">
+            <a href="{% url 'department-register' %}" class="inline-block bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-500">+ 新規部署登録</a>
+        </div>
+        {% if messages %}
+        <div class="alert-messages">
+            {% for message in messages %}
+                <div class="alert text-center
+                {% if 'error' in message.tags %}text-red-600{% endif %}
+                {% if 'success' in message.tags %}text-green-600{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="overflow-x-auto flex justify-center">
+            {% if departments %}
+            <table class="table">
+                <thead class="bg-gray-700 text-white">
+                    <th scope="col" class="px-6 py-3">部署ID</th>
+                    <th scope="col" class="px-6 py-3">部署名</th>
+                    <th scope="col" class="px-6 py-3"></th>
+                    <th scope="col" class="px-6 py-3"></th>
+                </thead>
+                <tbody class="bg-gray-100">
+                    {% for department in departments %}
+                    <tr class="hover:text-white hover:bg-gray-400">
+                        <th class="px-6 py-4">{{ department.id }}</th>
+                        <td class="px-6 py-4">{{ department.name }}</td>
+                        <td class="px-6 py-4">
+                            <form method="POST" action="{% url 'department-edit' department.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="text-orange-600">編集</button>
+                            </form>
+                        </td>
+                        <td class="px-6 py-4">
+                            <form method="POST" action="{% url 'department-delete' department.id %}" onsubmit="return confirm('本当にこの部署を削除しますか？')">
+                                {% csrf_token %}
+                                <button type="submit" class="text-red-600">削除</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p class="text-center mt-4">No Data</p>
+            {% endif %}
+        </div>
+        <div class="text-center mt-6">
+            <a href="{% url 'department-management' %}" class="inline-block bg-gray-600 text-white py-2 px-4 rounded-lg hover:underline text-right">戻る</a>
+        </div>
+    </div>
+</body>
+</html>

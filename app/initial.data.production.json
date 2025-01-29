@@ -1,0 +1,112 @@
+[
+    {
+        "model": "business_management.production",
+        "pk": 1,
+        "fields": {
+            "order": {"model": "business_management.order", "pk": 1},
+            "lot_quantity": 100,
+            "due_date": "2025-02-20",
+            "estimated_completion_date": "2025-03-01",
+            "completion_date": "2025-03-02"
+        }
+    },
+    {
+        "model": "business_management.production",
+        "pk": 2,
+        "fields": {
+            "order": 2,
+            "lot_quantity": 150,
+            "due_date": "2025-02-21",
+            "estimated_completion_date": "2025-03-03",
+            "completion_date": null
+        }
+    },
+    {
+        "model": "business_management.production",
+        "pk": 3,
+        "fields": {
+            "order": 3,
+            "lot_quantity": 120,
+            "due_date": "2025-02-22",
+            "estimated_completion_date": "2025-03-05",
+            "completion_date": "2025-03-06"
+        }
+    },
+    {
+        "model": "business_management.production",
+        "pk": 4,
+        "fields": {
+            "order": 4,
+            "lot_quantity": 130,
+            "due_date": "2025-02-23",
+            "estimated_completion_date": "2025-03-07",
+            "completion_date": "2025-03-08"
+        }
+    },
+    {
+        "model": "business_management.production",
+        "pk": 5,
+        "fields": {
+            "order": 5,
+            "lot_quantity": 110,
+            "due_date": "2025-02-24",
+            "estimated_completion_date": "2025-03-09",
+            "completion_date": null
+        }
+    },
+    {
+        "model": "business_management.production",
+        "pk": 6,
+        "fields": {
+            "order": 6,
+            "lot_quantity": 140,
+            "due_date": "2025-02-25",
+            "estimated_completion_date": "2025-03-11",
+            "completion_date": "2025-03-12"
+        }
+    },
+    {
+        "model": "business_management.production",
+        "pk": 7,
+        "fields": {
+            "order": 7,
+            "lot_quantity": 160,
+            "due_date": "2025-02-26",
+            "estimated_completion_date": "2025-03-13",
+            "completion_date": "2025-03-14"
+        }
+    },
+    {
+        "model": "business_management.production",
+        "pk": 8,
+        "fields": {
+            "order": 8,
+            "lot_quantity": 170,
+            "due_date": "2025-02-27",
+            "estimated_completion_date": "2025-03-15",
+            "completion_date": "2025-03-16"
+        }
+    },
+    {
+        "model": "business_management.production",
+        "pk": 9,
+        "fields": {
+            "order": 9,
+            "lot_quantity": 180,
+            "due_date": "2025-02-28",
+            "estimated_completion_date": "2025-03-17",
+            "completion_date": "2025-03-18"
+        }
+    },
+    {
+        "model": "business_management.production",
+        "pk": 10,
+        "fields": {
+            "order": 10,
+            "lot_quantity": 190,
+            "due_date": "2025-03-01",
+            "estimated_completion_date": "2025-03-19",
+            "completion_date": "2025-03-20"
+        }
+    }
+]

@@ -1,0 +1,115 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+    {% tailwind_css %}
+</head>
+<body>
+{% include 'header.html' %}
+    <div class="container mx-auto px-4">
+        <h1 class="text-2xl font-bold mb-6 text-center">従業員一覧</h1>
+        <form method="GET" action="" class="w-full p-4  rounded-lg flex justify-center space-x-3">
+            {% csrf_token %}            
+            <div class="mb-4">
+                <label for="search_type" class="block text-lg font-medium text-gray-700"></label>
+                {{ search_form.search_type }}
+            </div>
+            
+            <div class="mb-4">
+                <label for="query" class="block text-lg font-medium text-gray-700"></label>
+                {{ search_form.query }}
+            </div>
+        
+            <div class="mb-4">
+                <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-500">
+                    検索
+                </button>
+            </div>
+            
+            <div class="mb-4">
+                <a href="{% url 'employee-manage' %}" class="inline-block bg-gray-600 text-white py-2 px-6 rounded-lg hover:bg-gray-500">
+                    クリア
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <a href="{% url 'employee-register' %}" class="inline-block bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-500">+ 新規従業員登録</a>
+            </div>
+        </form>
+
+        {% if messages %}
+        <div class="alert-messages">
+            {% for message in messages %}
+                <div class="alert text-center
+                {% if 'error' in message.tags %}text-red-600{% endif %}
+                {% if 'success' in message.tags %}text-green-600{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="overflow-x-auto flex justify-center">
+            {% if employees %}
+                <table class="table">
+                    <thead class="bg-gray-700 text-white">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">従業員ID</th>
+                            <th scope="col" class="px-6 py-3">名前</th>                            
+                            <th scope="col" class="px-6 py-3">部署名</th>
+                            <th scope="col" class="px-6 py-3">パスワード</th>
+                            <th scope="col" class="px-6 py-3"></th>
+                            <th scope="col" class="px-6 py-3"></th>
+                            <th scope="col" class="px-6 py-3"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-gray-100">
+                        {% for employee in employees %}
+                            <tr class="hover:text-white hover:bg-gray-400">
+                                <th scope="row" class="px-6 py-4">{{ employee.id }}</th>
+                                <td class="px-6 py-4">{{ employee.name }}</td>
+                                <td class="px-6 py-4">{{ employee.department.name | default:'None' }}</td>
+                                <td class="px-6 py-4"><span id="password-{{ employee.id }}" class="password-masked" onclick="togglePassword('{{ employee.id }}')" data-password="{{ employee.password }}">********</span></td>
+                                <td class="px-6 py-4"><a href="" class="text-blue-600">詳細</a></td>
+                                <td class="px-6 py-4">
+                                    <form method="POST" action="{% url 'employee-edit' employee.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="text-orange-600">編集</button>
+                                    </form>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <form method="POST" action="{% url 'employee-delete' employee.id %}" onsubmit="return confirm('本当にこの従業員を削除しますか？');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="text-red-600">削除</button>
+                                </form>
+                            </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="text-center mt-4">No Data</p>
+            {% endif %}
+        </div>
+        <div class="text-center mt-6">
+            <a href="{% url 'employee-management' %}" class="inline-block bg-gray-600 text-white py-2 px-4 rounded-lg hover:underline text-right">戻る</a>
+        </div>
+    </div>
+    <script>
+        function togglePassword(employeeId) {
+            const passwordElement = document.getElementById('password-' + employeeId);
+            const currentText = passwordElement.innerText;
+            const actualPassword = passwordElement.getAttribute('data-password');
+    
+            if (currentText === '********') {
+                passwordElement.innerText = actualPassword;
+            } else {
+                passwordElement.innerText = '********';
+            }
+        }
+    </script>
+</body>
+</html>

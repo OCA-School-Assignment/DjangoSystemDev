@@ -1,1 +1,0 @@
-# JHSAND-Django-SystemDevAPractice1

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <title>Login</title>
+    <title>Employee Register</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% tailwind_css %}
@@ -11,26 +11,34 @@
     {% include 'header.html' %}
     <main class="flex items-center justify-center h-[calc(100vh-4rem)]">
       <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
-        <h1 class="text-4xl text-center mb-6">REGISTER</h1>
+        <h1 class="text-4xl text-center mb-6">従業員登録</h1>
+        {% if messages %}
+          <div class="alert-messages">
+              {% for message in messages %}
+                  <div class="alert 
+                  {% if 'error' in message.tags %}text-red-600{% endif %}
+                  {% if 'success' in message.tags %}text-green-600{% endif %}">
+                      {{ message }}
+                  </div>
+              {% endfor %}
+          </div>
+          {% endif %}
         <form action="" method="POST">
           {% csrf_token %}
-          {% for message in messages %}
-            <p style="color: red;">{{ message }}</p>
-          {% endfor %}
           <p class="mb-4">
             <label for="employee_id" class="block">従業員ID</label>
             {{ form.employee_id }}
           </p>
           <p class="mb-4">
-            <label for="employee_id" class="block">部署ID</label>
+            <label for="department_id" class="block">部署ID</label>
             {{ form.department_id }}
           </p>
           <p class="mb-4">
-            <label for="employee_id" class="block">名前</label>
+            <label for="name" class="block">名前</label>
             {{ form.name }}
           </p>
           <p class="mb-4">
-            <label for="employee_id" class="block">メールアドレス</label>
+            <label for="email" class="block">メールアドレス</label>
             {{ form.email }}
           </p>
           <p class="mb-4">
@@ -42,10 +50,10 @@
           type="submit"
           value="Register"
         >
-          Register
+          登録
         </button>
-        <a href="{% url 'index' %}" class="text-blue-800">Already have account? Login here</a>
-        </form>
+        <a href="{% url 'employee-manage' %}" class="inline-block bg-gray-600 text-white py-2 px-4 rounded-lg hover:underline text-right">戻る</a>
+      </form>
       </div>
     </main>
   </body>

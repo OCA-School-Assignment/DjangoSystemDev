@@ -9,7 +9,31 @@
 </head>
 <body>
     {% include 'header.html' %}
-    <h1>Home</h1>
-    <h2>Welcome, {{ employee.name }}</h2>
+    <div class="flex items-center justify-center min-h-screen max-w-lg mx-auto">
+        {% if request.session.department_name == 'Sales' %}
+            <ul class="text-center space-y-3 mx-auto w-full">
+                <li><a href="" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">売上管理</a></li>
+                <li><a href="" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">顧客管理</a></li>
+            </ul>
+        {% elif request.session.department_name == 'Human Resources' %}
+            <ul class="text-center space-y-3 mx-auto w-full">
+                <li class="w-full"><a href="{% url 'employee-management' %}" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">従業員管理</a></li>
+                <li><a href="{% url 'department-management' %}" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">部署管理</a></li>
+            </ul>
+        {% elif request.session.department_name == 'Production Management' %}
+            <ul class="text-center space-y-3  mx-auto w-full">
+                <li><a href="{% url 'production-management' %}" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">生産管理</a></li>
+                <li><a href="" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">在庫情報</a></li>
+                <li><a href="" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">入荷情報</a></li>
+            </ul>
+        {% elif request.session.department_name == 'Product Management' %}
+            <ul class="text-center space-y-3 mx-auto w-full">
+                <li><a href="{% url 'product-management' %}" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">製品管理</a></li>
+                <li><a href="{% url 'stock-management' %}" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">在庫管理</a></li>
+                <li><a href="{% url 'shipment-management' %}" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">出荷管理</a></li>
+
+            </ul>
+        {% endif %}
+    </div>
 </body>
 </html>

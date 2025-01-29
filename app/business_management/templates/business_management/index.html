@@ -18,7 +18,7 @@
             <p style="color: red;">{{ message }}</p>
           {% endfor %}
           <p class="mb-4">
-            <label for="employee_id" class="block">従業員ID</label>
+            <label for="employee_id">従業員ID</label>
             <!-- <input
               type="text"
               id="employee_id"
@@ -28,7 +28,7 @@
             {{ form.employee_id}}
           </p>
           <p class="mb-4">
-            <label for="password" class="block">パスワード</label>
+            <label for="password">パスワード</label>
             <!-- <input
               type="password"
               id="password"
@@ -44,7 +44,6 @@
         >
           LOGIN
         </button>
-        <a href="{% url 'register' %}" class="text-blue-800">Don't have account? Register here</a>
         </form>
       </div>
     </main>

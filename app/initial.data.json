@@ -1,0 +1,451 @@
+[
+    {
+        "model": "business_management.department",
+        "pk": 1,
+        "fields": {
+            "name": "Sales"
+        }
+    },
+    {
+        "model": "business_management.department",
+        "pk": 2,
+        "fields": {
+            "name": "Human Resources"
+        }
+    },
+    {
+        "model": "business_management.department",
+        "pk": 3,
+        "fields": {
+            "name": "Production Management"
+        }
+    },
+    {
+        "model": "business_management.department",
+        "pk": 4,
+        "fields": {
+            "name": "Product Management"
+        }
+    },
+    {
+        "model": "business_management.employee",
+        "pk": "A0000001",
+        "fields": {
+            "name": "田中太郎",
+            "email": "tanaka@example.com",
+            "department_id": 1,
+            "password": "tanaka@123"
+        }
+    },
+    {
+        "model": "business_management.employee",
+        "pk": "A0000002",
+        "fields": {
+            "name": "星白萌奈",
+            "email": "hoshijiro@example.com",
+            "department_id": 2,
+            "password": "hoshijiro@123"
+        }
+    },
+    {
+        "model": "business_management.employee",
+        "pk": "A0000003",
+        "fields": {
+            "name": "櫻井海斗",
+            "email": "sakurai@example.com",
+            "department_id": 3,
+            "password": "sakurai@123"
+        }
+    },
+    {
+        "model": "business_management.employee",
+        "pk": "A0000004",
+        "fields": {
+            "name": "石田翔太",
+            "email": "ishida@example.com",
+            "department_id": 4, 
+            "password": "ishida@123"
+        }
+    },
+    {
+        "model": "business_management.employee",
+        "pk": "A0000005",
+        "fields": {
+            "name": "社長",
+            "email": "syacho@example.com",
+            "department_id": null,
+            "password": "syacho@123"
+        }
+    },
+    {
+
+        "model": "business_management.items",
+        "pk": "C1I00001",
+        "fields": {
+            "name": "Apple Red",
+            "price": 1000
+        }
+    },
+    {
+        "model": "business_management.items",
+        "pk": "C1I00002",
+        "fields": {
+            "name": "Banana Yellow",
+            "price": 1500
+        }
+    },
+    {
+        "model": "business_management.items",
+        "pk": "C1I00003",
+        "fields": {
+            "name": "Carrot Orange",
+            "price": 1200
+        }
+    },
+    {
+        "model": "business_management.items",
+        "pk": "C2I00001",
+        "fields": {
+            "name": "Shampoo Fresh",
+            "price": 2500
+        }
+    },
+    {
+        "model": "business_management.items",
+        "pk": "C3I00001",
+        "fields": {
+            "name": "Laptop Pro",
+            "price": 1500
+        }
+    },
+    {
+        "model": "business_management.items",
+        "pk": "C3I00002",
+        "fields": {
+            "name": "Smartphone X",
+            "price": 2000
+        }
+    },
+    {
+        "model": "business_management.items",
+        "pk": "C3I00003",
+        "fields": {
+            "name": "Earbuds Elite",
+            "price": 1100
+        }
+    },
+    {
+        "model": "business_management.items",
+        "pk": "C4I00001",
+        "fields": {
+            "name": "Winter Jacket",
+            "price": 1800
+        }
+    },
+    {
+        "model": "business_management.items",
+        "pk": "C4I00002",
+        "fields": {
+            "name": "Summer Hat",
+            "price": 500
+        }
+    },
+    {
+        "model": "business_management.items",
+        "pk": "C2I00002",
+        "fields": {
+            "name": "Conditioner Smooth",
+            "price": 800
+        }
+    },
+    {
+        "model": "business_management.stock",
+        "pk": "C1I00001",
+        "fields": {
+            "location": "Tokyo",
+            "quantity": 50
+        }
+    },
+    {
+        "model": "business_management.stock",
+        "pk": "C1I00002",
+        "fields": {
+            "location": "Osaka",
+            "quantity": 75
+        }
+    },
+    {
+        "model": "business_management.stock",
+        "pk": "C1I00003",
+        "fields": {
+            "location": "Tokyo",
+            "quantity": 60
+        }
+    },
+    {
+        "model": "business_management.stock",
+        "pk": "C2I00001",
+        "fields": {
+            "location": "Osaka",
+            "quantity": 20
+        }
+    },
+    {
+        "model": "business_management.stock",
+        "pk": "C2I00002",
+        "fields": {
+            "location": "Tokyo",
+            "quantity": 30
+        }
+    },
+    {
+        "model": "business_management.stock",
+        "pk": "C3I00001",
+        "fields": {
+            "location": "Osaka",
+            "quantity": 10
+        }
+    },
+    {
+        "model": "business_management.stock",
+        "pk": "C3I00002",
+        "fields": {
+            "location": "Tokyo",
+            "quantity": 15
+        }
+    },
+    {
+        "model": "business_management.stock",
+        "pk": "C3I00003",
+        "fields": {
+            "location": "Osaka",
+            "quantity": 25
+        }
+    },
+    {
+        "model": "business_management.stock",
+        "pk": "C4I00001",
+        "fields": {
+            "location": "Tokyo",
+            "quantity": 40
+        }
+    },
+    {
+        "model": "business_management.stock",
+        "pk": "C4I00002",
+        "fields": {
+            "location": "Osaka",
+            "quantity": 100
+        }
+    },
+    {
+        "model": "business_management.shipmentLog",
+        "pk": "C1I00001",
+        "fields": {
+            "location": "Tokyo",
+            "quantity": 50,
+            "shipment_date": "2025-01-20",
+            "action": "Out"
+        }
+    },
+    {
+        "model": "business_management.shipmentLog",
+        "pk": "C1I00002",
+        "fields": {
+            "location": "Osaka",
+            "quantity": 30,
+            "shipment_date": "2025-01-19",
+            "action": "In"
+        }
+    },
+    {
+        "model": "business_management.shipmentLog",
+        "pk": "C1I00003",
+        "fields": {
+            "location": "Tokyo",
+            "quantity": 60,
+            "shipment_date": "2025-01-18",
+            "action": "Out"
+        }
+    },
+    {
+        "model": "business_management.shipmentLog",
+        "pk": "C2I00001",
+        "fields": {
+            "location": "Osaka",
+            "quantity": 20,
+            "shipment_date": "2025-01-17",
+            "action": "In"
+        }
+    },
+    {
+        "model": "business_management.shipmentLog",
+        "pk": "C2I00002",
+        "fields": {
+            "location": "Tokyo",
+            "quantity": 10,
+            "shipment_date": "2025-01-16",
+            "action": "Out"
+        }
+    },
+    {
+        "model": "business_management.shipmentLog",
+        "pk": "C3I00001",
+        "fields": {
+            "location": "Osaka",
+            "quantity": 15,
+            "shipment_date": "2025-01-15",
+            "action": "In"
+        }
+    },
+    {
+        "model": "business_management.shipmentLog",
+        "pk": "C3I00002",
+        "fields": {
+            "location": "Tokyo",
+            "quantity": 40,
+            "shipment_date": "2025-01-14",
+            "action": "Out"
+        }
+    },
+    {
+        "model": "business_management.shipmentLog",
+        "pk": "C3I00003",
+        "fields": {
+            "location": "Osaka",
+            "quantity": 25,
+            "shipment_date": "2025-01-13",
+            "action": "In"
+        }
+    },
+    {
+        "model": "business_management.shipmentLog",
+        "pk": "C4I00001",
+        "fields": {
+            "location": "Tokyo",
+            "quantity": 35,
+            "shipment_date": "2025-01-12",
+            "action": "Out"
+        }
+    },
+    {
+        "model": "business_management.shipmentLog",
+        "pk": "C4I00002",
+        "fields": {
+            "location": "Osaka",
+            "quantity": 50,
+            "shipment_date": "2025-01-11",
+            "action": "In"
+        }
+    },
+    {
+        "model": "business_management.customer",
+        "pk": "C0000001",
+        "fields": {
+            "name": "Alice Smith",
+            "contact_number": "09012345678",
+            "email": "alice.smith@example.com",
+            "address": "123 Apple Street, Tokyo",
+            "postal_code": "100-0001"
+        }
+    },
+    {
+        "model": "business_management.customer",
+        "pk": "C0000002",
+        "fields": {
+            "name": "Bob Johnson",
+            "contact_number": "09023456789",
+            "email": "bob.johnson@example.com",
+            "address": "456 Orange Avenue, Osaka",
+            "postal_code": "530-0002"
+        }
+    },
+    {
+        "model": "business_management.customer",
+        "pk": "C0000003",
+        "fields": {
+            "name": "Charlie Brown",
+            "contact_number": "09034567890",
+            "email": "charlie.brown@example.com",
+            "address": "789 Banana Blvd, Kyoto",
+            "postal_code": "600-0003"
+        }
+    },
+    {
+        "model": "business_management.customer",
+        "pk": "C0000004",
+        "fields": {
+            "name": "David Lee",
+            "contact_number": "09045678901",
+            "email": "david.lee@example.com",
+            "address": "101 Pine Road, Fukuoka",
+            "postal_code": "810-0004"
+        }
+    },
+    {
+        "model": "business_management.customer",
+        "pk": "C0000005",
+        "fields": {
+            "name": "Eve White",
+            "contact_number": "09056789012",
+            "email": "eve.white@example.com",
+            "address": "202 Cherry Drive, Sapporo",
+            "postal_code": "060-0005"
+        }
+    },
+    {
+        "model": "business_management.customer",
+        "pk": "C0000006",
+        "fields": {
+            "name": "Frank Harris",
+            "contact_number": "09067890123",
+            "email": "frank.harris@example.com",
+            "address": "303 Mango Lane, Sendai",
+            "postal_code": "980-0006"
+        }
+    },
+    {
+        "model": "business_management.customer",
+        "pk": "C0000007",
+        "fields": {
+            "name": "Grace Miller",
+            "contact_number": "09078901234",
+            "email": "grace.miller@example.com",
+            "address": "404 Grape Street, Yokohama",
+            "postal_code": "220-0007"
+        }
+    },
+    {
+        "model": "business_management.customer",
+        "pk": "C0000008",
+        "fields": {
+            "name": "Hank Wilson",
+            "contact_number": "09089012345",
+            "email": "hank.wilson@example.com",
+            "address": "505 Watermelon Avenue, Kobe",
+            "postal_code": "650-0008"
+        }
+    },
+    {
+        "model": "business_management.customer",
+        "pk": "C0000009",
+        "fields": {
+            "name": "Ivy Moore",
+            "contact_number": "09090123456",
+            "email": "ivy.moore@example.com",
+            "address": "606 Strawberry Blvd, Naha",
+            "postal_code": "900-0009"
+        }
+    },
+    {
+        "model": "business_management.customer",
+        "pk": "C0000010",
+        "fields": {
+            "name": "Jack Taylor",
+            "contact_number": "09001234567",
+            "email": "jack.taylor@example.com",
+            "address": "707 Kiwi Road, Nagoya",
+            "postal_code": "460-0010"
+        }
+    }
+]

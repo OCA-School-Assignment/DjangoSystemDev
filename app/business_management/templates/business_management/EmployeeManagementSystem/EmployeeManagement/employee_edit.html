@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Edit</title>
+</head>
+<body>
+    <h1>従業員情報の編集</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="flex space-x-3">
+            <button type="submit">更新</button>
+            <a href="{% url 'employee-manage' %}" class="inline-block bg-gray-600 text-white py-2 px-4 rounded-lg hover:underline text-center">戻る</a>
+        </div>
+    </form>
+</body>
+</html>
