@@ -21,13 +21,15 @@ class CustomerListView(ListView):
     
     def get_queryset(self):
         queryset = super().get_queryset()
-        search_type = self.request.GET.get('search_type', '')
+        # search_type = self.request.GET.get('search_type', '')
         query = self.request.GET.get('query', '')
         
-        if search_type == 'id' and query:
+        if query:
             queryset = queryset.filter(id=query)
-        elif search_type == 'name' and query:
-            queryset = queryset.filter(name__icontains=query)
+        # if search_type == 'id' and query:
+        #     queryset = queryset.filter(id=query)
+        # elif search_type == 'name' and query:
+            # queryset = queryset.filter(name__icontains=query)
         
         return queryset
 

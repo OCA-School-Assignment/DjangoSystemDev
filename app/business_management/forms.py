@@ -201,12 +201,20 @@ class ProductionSearchForm(forms.Form):
     
 
 class CustomerSearchForm(forms.Form):
-    search_type_choices = [
-        ('id', '得意先ID'),
-        ('name', '得意先名'),
-    ]
-    search_type = forms.ChoiceField(choices=search_type_choices, required=True)
-    query = forms.CharField(max_length=100, required=False)
+    # search_type_choices = [
+    #     ('id', '得意先ID'),
+    #     ('name', '得意先名'),
+    # ]
+    # search_type = forms.ChoiceField(choices=search_type_choices, required=True)
+    query = forms.CharField(
+        label='得意先ID',
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded', 'placeholder': '得意先ID',})
+    )
+
+
+class DateRangeSearchForm(forms.Form):
+    year = forms.ChoiceField(choices=[], required=False)
 
 
 class CustomerRegisterForm(forms.ModelForm):
@@ -233,4 +241,39 @@ class CustomerEditForm(forms.ModelForm):
             'contact_number': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
             'postal_code': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
             'address': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+        }
+
+
+class OrderSearchForm(forms.Form):
+    search_type_choices = [
+        ('id', '受注ID'),
+        ('customer_name', '得意先名'),
+    ]
+    search_type = forms.ChoiceField(choices=search_type_choices, required=True)
+    query = forms.CharField(max_length=100, required=False)
+
+class OrderRegisterForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['customer', 'item', 'quantity', 'order_date', 'estimated_delivery_date', 'delivery_date']
+        widgets = {
+            'customer': forms.Select(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'item': forms.Select(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'quantity': forms.NumberInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'order_date': forms.DateInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded', 'type': 'date'}),
+            'estimated_delivery_date': forms.DateInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded', 'type': 'date'}),
+            'delivery_date': forms.DateInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded', 'type': 'date'}),
+        }
+
+class OrderEditForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['customer', 'item', 'quantity', 'order_date', 'estimated_delivery_date', 'delivery_date']
+        widgets = {
+            'customer': forms.Select(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'item': forms.Select(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'quantity': forms.NumberInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'order_date': forms.DateInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'estimated_delivery_date': forms.DateInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'delivery_date': forms.DateInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
         }

@@ -35,9 +35,11 @@
                 </a>
             </div>
 
-            <div class="mb-4">
-                <a href="{% url 'product-register' %}" class="inline-block bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-500">+ 新規製品登録</a>
-            </div>
+            {% if request.session.department_name == 'Product Management' %}
+                <div class="mb-4">
+                    <a href="{% url 'product-register' %}" class="inline-block bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-500">+ 新規製品登録</a>
+                </div>
+            {% endif %}
         </form>
 
         {% if messages %}
@@ -60,8 +62,10 @@
                             <th scope="col" class="px-6 py-3">製品ID</th>
                             <th scope="col" class="px-6 py-3">製品名</th>                            
                             <th scope="col" class="px-6 py-3">製品単価</th>
-                            <th scope="col" class="px-6 py-3"></th>
-                            <th scope="col" class="px-6 py-3"></th>
+                            {% if request.session.department_name == 'Product Management' %}
+                                <th scope="col" class="px-6 py-3"></th>
+                                <th scope="col" class="px-6 py-3"></th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody class="bg-gray-100">
@@ -70,18 +74,20 @@
                                 <th scope="row" class="px-6 py-4">{{ product.id }}</th>
                                 <td class="px-6 py-4">{{ product.name }}</td>
                                 <td class="px-6 py-4">{{ product.price | default:'None' }}</td>
-                                <td class="px-6 py-4">
-                                    <form method="POST" action="{% url 'product-edit' product.id %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="text-orange-600">編集</button>
-                                    </form>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <form method="POST" action="{% url 'product-delete' product.id %}" onsubmit="return confirm('本当にこの製品を削除しますか？');">
-                                    {% csrf_token %}
-                                    <button type="submit" class="text-red-600">削除</button>
-                                </form>
-                            </td>
+                                {% if request.session.department_name == 'Product Management' %}
+                                    <td class="px-6 py-4">
+                                        <form method="POST" action="{% url 'product-edit' product.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="text-orange-600">編集</button>
+                                        </form>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <form method="POST" action="{% url 'product-delete' product.id %}" onsubmit="return confirm('本当にこの製品を削除しますか？');">
+                                            {% csrf_token %}
+                                            <button type="submit" class="text-red-600">削除</button>
+                                        </form>
+                                    </td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                     </tbody>

@@ -12,8 +12,10 @@
     <div class="flex items-center justify-center min-h-screen max-w-lg mx-auto">
         {% if request.session.department_name == 'Sales' %}
             <ul class="text-center space-y-3 mx-auto w-full">
-                <li><a href="" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">売上管理</a></li>
-                <li><a href="{% url 'customer-management' %}" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">顧客管理</a></li>
+                <li><a href="{% url 'customer-management' %}" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">得意先管理</a></li>
+                <li><a href="{% url 'order-management' %}" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">受注管理</a></li>
+                <li><a href="{% url 'sales-management' %}" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">売上管理</a></li>
+                <li><a href="{% url 'product-management' %}" class="block bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition duration-300 text-xl">製品情報閲覧</a></li>
             </ul>
         {% elif request.session.department_name == 'Human Resources' %}
             <ul class="text-center space-y-3 mx-auto w-full">

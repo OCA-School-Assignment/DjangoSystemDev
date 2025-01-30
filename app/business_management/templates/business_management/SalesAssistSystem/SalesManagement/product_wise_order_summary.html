@@ -1,0 +1,72 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Wise Order Summary</title>
+    {% tailwind_css %}
+</head>
+<body>
+{% include 'header.html' %}
+    <div class="container mx-auto px-4">
+        <h1 class="text-2xl font-bold mb-6 text-center items-center">商品別受注集計</h1>
+        <div class="w-full p-4 rounded-lg flex justify-center space-x-3 items-center">
+
+            <form method="POST" action="" class="flex items-center space-x-3">
+                {% csrf_token %}
+                <div>
+                    {{ form.query }}
+                </div>
+
+                <button type="submit" class="bg-blue-600 text-white h-10 px-6 rounded-lg hover:bg-blue-500 flex items-center">
+                    検索
+                </button>
+
+                <div>
+                    <a href="{% url 'product-wise-order-summary' %}" class="bg-gray-600 text-white h-10 px-6 rounded-lg hover:bg-gray-500 flex items-center justify-center">
+                        クリア
+                    </a>
+                </div>
+            </form>
+        </div>
+            
+        <div class="mx-auto">
+
+            {% if products_by_year %}
+                {% for year, products in products_by_year.items %}
+                <div class="">
+                    <h3>年: {{ year }}</h3>
+                    <table class="table">
+                        <thead class="bg-gray-700 text-white">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">製品ID</th>
+                                <th scope="col" class="px-6 py-3">製品名</th>
+                                <th scope="col" class="px-6 py-3">受注数</th>
+                                <th scope="col" class="px-6 py-3">受注金額</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-100">
+                            {% for product in products %}
+                                <tr class="hover:text-white hover:bg-gray-400">
+                                    <th scope="row" class="px-6 py-4">{{ product.item__id }}</th>
+                                    <td class="px-6 py-4">{{ product.item__name }}</td>
+                                    <td class="px-6 py-4">{{ product.total_quantity }}</td>
+                                    <td class="px-6 py-4">{{ product.total_price }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center mt-4">No Data</p>
+            {% endif %}
+        </div>
+        <div class="text-center mt-6">
+            <a href="{% url 'sales-management' %}" class="inline-block bg-gray-600 text-white py-2 px-4 rounded-lg hover:underline text-right">戻る</a>
+        </div>
+    </div>
+    
+</body>
+</html>

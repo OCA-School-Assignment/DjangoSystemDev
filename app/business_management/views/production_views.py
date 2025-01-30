@@ -1,12 +1,10 @@
-from ..models import Production, Order
+from ..models import Production
 from ..forms import ProductionSearchForm
 from ..forms import ProductionRegisterForm, ProductionEditForm
 from django.views.generic import ListView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.db.utils import IntegrityError
-from django.db.models import Prefetch
-from django.http import HttpResponseForbidden
 
 
 def production_management(request):

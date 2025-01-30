@@ -4,7 +4,6 @@ from django.views.generic import ListView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.db.utils import IntegrityError
-from django.http import HttpResponseForbidden
 
 
 def employee_management(request):

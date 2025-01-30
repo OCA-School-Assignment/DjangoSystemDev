@@ -137,6 +137,8 @@ class Order(models.Model):
     item = models.ForeignKey(Items, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     order_date = models.DateField()
+    estimated_delivery_date = models.DateField(blank=True, null=True)
+    delivery_date = models.DateField(blank=True, null=True)
 
     class Meta:
         db_table = 'orders'
