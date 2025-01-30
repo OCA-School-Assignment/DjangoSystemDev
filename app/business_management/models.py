@@ -104,7 +104,7 @@ class Stock(models.Model):
     
 
 class ShipmentLog(models.Model):
-    item = models.ForeignKey(Items, on_delete=models.CASCADE, primary_key=True)
+    item = models.ForeignKey(Items, on_delete=models.CASCADE)
     action = models.CharField(max_length=3, default=None)
     quantity = models.IntegerField(default=0)
     shipment_date = models.DateField(default=None)

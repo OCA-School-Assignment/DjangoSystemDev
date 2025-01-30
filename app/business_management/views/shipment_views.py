@@ -16,6 +16,12 @@ class ShipmentLogListView(ListView):
     
     def get_queryset(self):
         queryset = super().get_queryset()
+
+        if self.request.session.get('department_name') == 'Production Management':
+            queryset = queryset.filter(action='In').order_by('id')
+        else:
+            queryset = queryset.filter(action='Out').order_by('id')
+
         search_type = self.request.GET.get('search_type', '')
         query = self.request.GET.get('query', '')
         
@@ -29,9 +35,5 @@ class ShipmentLogListView(ListView):
         return queryset
     
 def shipment_test(request):
-    print('---------------------------')
-    print('shipment_test')
     shipment_all = ShipmentLog.objects.all()
-    print(shipment_all)
-    print(shipment_all)
     return render(request, 'business_management/ProductManagementSystem/ShipmentManagement/shipment_test.html', {'shipment_all': shipment_all})

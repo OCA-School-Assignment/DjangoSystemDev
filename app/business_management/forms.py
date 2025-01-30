@@ -1,5 +1,5 @@
 from django import forms
-from .models import Department, Employee, Items, Production, Order
+from .models import Department, Employee, Items, Production, Order, Customer
 from django.core.exceptions import ValidationError
 
 class LoginForm(forms.Form):
@@ -80,6 +80,9 @@ class DepartmentRegisterForm(forms.ModelForm):
     class Meta:
         model = Department
         fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'autofocus': True, 'class': 'w-full p-2 border border-gray-300 rounded',})
+        }   
 
 class DepartmentEditForm(forms.ModelForm):
     class Meta:
@@ -149,18 +152,11 @@ class ShipmentLogSearchForm(forms.Form):
 
 
 class ProductionRegisterForm(forms.ModelForm):
-    order_id = forms.ModelChoiceField(
-        queryset=Order.objects.all(), label='受注ID', required=True,
-    )
-
-    item_id = forms.ModelChoiceField(
-        queryset=Items.objects.all(), label='製品ID', required=True,
-    )
-
     class Meta:
         model = Production
-        fields = ['lot_quantity', 'due_date', 'estimated_completion_date', 'completion_date']
+        fields = ['order', 'lot_quantity', 'due_date', 'estimated_completion_date', 'completion_date']
         widgets = {
+            'order': forms.Select(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
             'lot_quantity': forms.NumberInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
             'due_date': forms.DateInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded', 'type': 'date'}),
             'estimated_completion_date': forms.DateInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded', 'type': 'date'}),
@@ -202,3 +198,39 @@ class ProductionSearchForm(forms.Form):
         label='製造ID', 
         required=False, 
         widget=forms.NumberInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded', 'placeholder': '製造ID',}))
+    
+
+class CustomerSearchForm(forms.Form):
+    search_type_choices = [
+        ('id', '得意先ID'),
+        ('name', '得意先名'),
+    ]
+    search_type = forms.ChoiceField(choices=search_type_choices, required=True)
+    query = forms.CharField(max_length=100, required=False)
+
+
+class CustomerRegisterForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['id', 'name', 'email', 'contact_number', 'postal_code', 'address']
+        widgets = {
+            'id': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'name': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'email': forms.EmailInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'contact_number': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'postal_code': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'address': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+        }
+
+
+class CustomerEditForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['name', 'email', 'contact_number', 'postal_code', 'address']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'email': forms.EmailInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'contact_number': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'postal_code': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+            'address': forms.TextInput(attrs={'class': 'w-full p-2 border border-gray-300 rounded',}),
+        }

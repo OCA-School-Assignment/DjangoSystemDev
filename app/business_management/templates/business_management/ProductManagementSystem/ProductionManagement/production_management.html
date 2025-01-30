@@ -10,29 +10,47 @@
 <body>
 {% include 'header.html' %}
     <div class="container mx-auto px-4">
-        <h1 class="text-2xl font-bold mb-6 text-center">生産一覧</h1>
-        <form method="GET" action="" class="w-full p-4  rounded-lg flex justify-center space-x-3">
-            {% csrf_token %}                      
-            <div class="mb-4">
-                {{ search_form.query }}
-            </div>
-        
-            <div class="mb-4">
-                <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-500">
-                    検索
-                </button>
-            </div>
+        <h1 class="text-2xl font-bold mb-6 text-center items-center">生産一覧</h1>
+        <div class="w-full p-4 rounded-lg flex justify-center space-x-3 items-center">
+            <form method="GET" action="" class="flex items-center space-x-3">
+                {% csrf_token %}                      
+                <div>
+                    {{ search_form.query }}
+                </div>
             
-            <div class="mb-4">
-                <a href="{% url 'production-manage' %}" class="inline-block bg-gray-600 text-white py-2 px-6 rounded-lg hover:bg-gray-500">
-                    クリア
-                </a>
+                <div>
+                    <button type="submit" class="bg-blue-600 text-white h-10 px-6 rounded-lg hover:bg-blue-500 flex items-center">
+                        検索
+                    </button>
+                </div>
+                
+                <div>
+                    <a href="{% url 'production-manage' %}" class="bg-gray-600 text-white h-10 px-6 rounded-lg hover:bg-gray-500 flex items-center justify-center">
+                        クリア
+                    </a>
+                </div>
+    
+                <div>
+                    <a href="{% url 'production-register' %}" class="bg-green-600 text-white h-10 px-6 rounded-lg hover:bg-green-500 flex items-center justify-center">
+                        + 新規生産登録
+                    </a>
+                </div>
+            </form>
+    
+            <!-- ✅ フィルターボタンも高さ統一 -->
+            <div>
+                {% if completed %}
+                    <a href="{% url 'production-manage' %}" class="bg-gray-500 text-white h-10 px-6 rounded-lg hover:bg-gray-400 flex items-center justify-center">
+                        全て表示
+                    </a>
+                {% else %}
+                    <a href="?completed=1" class="bg-yellow-500 text-white h-10 px-6 rounded-lg hover:bg-yellow-400 flex items-center justify-center">
+                        生産完了のみ表示
+                    </a>
+                {% endif %}
             </div>
-
-            <div class="mb-4">
-                <a href="{% url 'production-register' %}" class="inline-block bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-500">+ 新規生産登録</a>
-            </div>
-        </form>
+        </div>
+    </div>
 
         {% if messages %}
         <div class="alert-messages">

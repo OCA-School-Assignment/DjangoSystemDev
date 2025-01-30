@@ -20,23 +20,30 @@ class ProductionListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search_form'] = ProductionSearchForm()
+        context['completed'] = self.request.GET.get('completed', '')
         return context
     
     def get_queryset(self):
         queryset = super().get_queryset().order_by('id')
 
-        queryset = queryset.prefetch_related(
-            Prefetch('order_set', queryset=Order.objects.only('id', 'production', 'order_date', 'item_id').select_related('item'))
-        )
+        # queryset = queryset.prefetch_related(
+        #     Prefetch('order_set', queryset=Order.objects.only('id', 'production', 'order_date', 'item_id').select_related('item'))
+        # )
+        if self.request.GET.get('completed') == 'true':
+            queryset = queryset.filter(completion_date__isnull=False)
 
         query = self.request.GET.get('query', None)
 
         if query:
             try:
-                queryset = queryset.filter(order__id=query)
+                queryset = queryset.filter(id=query)
                 print(queryset)
             except ValueError:
                 messages.error(self.request, '製造IDは整数で入力してください。')
+
+        if self.request.GET.get('completed'):
+            queryset = queryset.filter(completion_date__isnull=False)
+
         return queryset
     
 def production_register(request):
@@ -46,20 +53,16 @@ def production_register(request):
     if request.method == 'POST':
         form = ProductionRegisterForm(request.POST)
         if form.is_valid():
-            production = form.save(commit=False)
+            try:
+                production = form.save(commit=False)
 
-            if not form.cleaned_data['completion_date']:
-                production.completion_date = None
-            
-            production.save()
-
-            order = form.cleaned_data['order_id']
-            item = form.cleaned_data['item_id']
-
-            order.production = production
-            order.item = item
-            order.save()
-            messages.success(request, f'製造ID:「{production.id}」を登録しました。')
+                if not form.cleaned_data['completion_date']:
+                    production.completion_date = None
+                
+                production.save()
+                messages.success(request, f'製造ID:「{production.id}」を登録しました。')
+            except IntegrityError:
+                messages.error(request, 'その受注IDに対する製造は既に登録されています。')
             return redirect('production-register')
     return render(request, 'business_management/ProductManagementSystem/ProductionManagement/production_register.html', params)
     

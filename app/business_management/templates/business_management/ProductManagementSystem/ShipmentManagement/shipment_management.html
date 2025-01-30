@@ -10,7 +10,7 @@
 <body>
 {% include 'header.html' %}
     <div class="container mx-auto px-4">
-        <h1 class="text-2xl font-bold mb-6 text-center">入出荷一覧</h1>
+        <h1 class="text-2xl font-bold mb-6 text-center">出荷一覧</h1>
         <form method="GET" action="" class="w-full p-4  rounded-lg flex justify-center space-x-3">
             {% csrf_token %}            
             <div class="mb-4">
@@ -53,6 +53,7 @@
                 <table class="table">
                     <thead class="bg-gray-700 text-white">
                         <tr>
+                            <th scope="col" class="px-6 py-3">出荷ID</th>
                             <th scope="col" class="px-6 py-3">製品ID</th>
                             <th scope="col" class="px-6 py-3">製品名</th>   
                             <th scope="col" class="px-6 py-3">製品単価</th>                         
@@ -65,7 +66,8 @@
                     <tbody class="bg-gray-100">
                         {% for shipment_log in shipment_logs %}
                             <tr class="hover:text-white hover:bg-gray-400">
-                                <th scope="row" class="px-6 py-4">{{ shipment_log.item_id }}</th>
+                                <th scope="row" class="px-6 py-4">{{ shipment_log.id }}</th>
+                                <td class="px-6 py-4">{{ shipment_log.item_id }}</td>
                                 <td class="px-6 py-4">{{ shipment_log.item.name }}</td>
                                 <td class="px-6 py-4">{{ shipment_log.item.price  }}</td>
                                 <td class="px-6 py-4">{{ shipment_log.action }}</td>
@@ -81,7 +83,7 @@
             {% endif %}
         </div>
         <div class="text-center mt-6">
-            <a href="{% url 'shipment-management' %}" class="inline-block bg-gray-600 text-white py-2 px-4 rounded-lg hover:underline text-right">戻る</a>
+            <a href="{% url 'home' %}" class="inline-block bg-gray-600 text-white py-2 px-4 rounded-lg hover:underline text-right">戻る</a>
         </div>
     </div>
 </body>

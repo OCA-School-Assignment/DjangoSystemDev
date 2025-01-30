@@ -10,6 +10,7 @@ from .views.production_views import production_management, production_register, 
 from .views.stock_views import StockListView
 from .views.shipment_views import ShipmentLogListView, shipment_test
 from .views.employee_views import employee_management, employee_register, employee_delete, employee_edit, EmployeeListView
+from .views.customer_views import customer_management, customer_register, customer_delete, customer_edit, CustomerListView
 
 
 urlpatterns = [
@@ -28,7 +29,7 @@ urlpatterns = [
     path('department-management/delete/<str:department_id>/', department_delete, name='department-delete'),
     path('department-management/edit/<str:department_id>/', department_edit, name='department-edit'),
     path('stock-management/', department_required(StockListView.as_view(), ['Product Management', 'Production Management']), name='stock-management'),
-    path('product-management/', product_management, name='product-management'),
+    path('product-management/', department_required(product_management, ['Product Management', 'Production Management']), name='product-management'),
     path('product-management/register/', department_required(product_register, ['Product Management']), name='product-register'),
     path('product-management/delete/<str:product_id>/', department_required(product_delete, ['Product Management']), name='product-delete'),
     path('product-management/edit/<str:product_id>/', department_required(product_edit, ['Product Management']), name='product-edit'),
@@ -40,4 +41,9 @@ urlpatterns = [
     path('production-management/delete/<str:production_id>/', department_required(production_delete, ['Production Management']), name='production-delete'),
     path('production-management/edit/<str:production_id>/', department_required(production_edit, ['Production Management']), name='production-edit'),
     path('production-management/manage', department_required(ProductionListView.as_view(), ['Production Management']), name='production-manage'),
+    path('customer-management', department_required(customer_management, ['Sales']), name='customer-management'),
+    path('customer-management/register', department_required(customer_register, ['Sales']), name='customer-register'),
+    path('customer-management/delete/<str:customer_id>/', department_required(customer_delete, ['Sales']), name='customer-delete'),
+    path('customer-management/edit/<str:customer_id>/', department_required(customer_edit, ['Sales']), name='customer-edit'),
+    path('customer-management/manage', department_required(CustomerListView.as_view(), ['Sales']), name='customer-manage'),
 ]
