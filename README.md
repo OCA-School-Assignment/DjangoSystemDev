@@ -119,5 +119,6 @@ VALUES
 
 ### Step 5: Start Tailwind
 ```bash
+python manage.py tailwind install
 python manage.py tailwind start
 ```
