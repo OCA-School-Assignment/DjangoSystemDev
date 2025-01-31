@@ -4,6 +4,11 @@
 ### Prerequisites
 - Ensure you have **Docker** and **VSCode with Dev Containers extension** installed.
 
+### Step 0: Run Container
+1. Run following command
+```bash
+docker compose up --build
+```
 
 ### Step 1: Open in DevContainer
 1. Open VSCode
@@ -18,11 +23,6 @@
     - **Python Debugger**
 
 ※ You might need to reload the window
-
-```
-pip -r install requirements.txt
-```
-
 
 ### Step 3: Database Setup
 1. Navigate to the app directory:
