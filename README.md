@@ -19,6 +19,10 @@
 
 ※ You might need to reload the window
 
+```
+pip -r install requirements.txt
+```
+
 
 ### Step 3: Database Setup
 1. Navigate to the app directory:

@@ -9,9 +9,9 @@ def sales_management(request):
     return render(request, 'business_management/SalesAssistSystem/SalesManagement/selection.html')
 
 def annual_order_summary(request):
-    form = CustomerSearchForm(request.POST or None)
-    if request.method == "POST" and form.is_valid():
-        customer_id = form.cleaned_data['query']
+    form = CustomerSearchForm(request.GET or None)
+    customer_id = request.GET.get('query')
+    if customer_id:
 
         orders = (
             Order.objects
@@ -49,9 +49,9 @@ def annual_order_summary(request):
 
 
 def product_wise_order_summary(request):
-    form = CustomerSearchForm(request.POST or None)
-    if request.method == "POST" and form.is_valid():
-        customer_id = form.cleaned_data['query']
+    form = CustomerSearchForm(request.GET or None)
+    customer_id = request.GET.get('query')
+    if customer_id:
 
         products = (
             Order.objects

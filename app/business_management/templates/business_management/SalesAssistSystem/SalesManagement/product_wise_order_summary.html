@@ -13,8 +13,7 @@
         <h1 class="text-2xl font-bold mb-6 text-center items-center">商品別受注集計</h1>
         <div class="w-full p-4 rounded-lg flex justify-center space-x-3 items-center">
 
-            <form method="POST" action="" class="flex items-center space-x-3">
-                {% csrf_token %}
+            <form method="GET" action="" class="flex items-center space-x-3">
                 <div>
                     {{ form.query }}
                 </div>
@@ -31,13 +30,11 @@
             </form>
         </div>
             
-        <div class="mx-auto">
-
             {% if products_by_year %}
                 {% for year, products in products_by_year.items %}
-                <div class="">
+                <div class="mt-6 text-center">
                     <h3>年: {{ year }}</h3>
-                    <table class="table">
+                    <table class="table mx-auto">
                         <thead class="bg-gray-700 text-white">
                             <tr>
                                 <th scope="col" class="px-6 py-3">製品ID</th>
@@ -57,7 +54,6 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                </div>
                 {% endfor %}
             {% else %}
                 <p class="text-center mt-4">No Data</p>

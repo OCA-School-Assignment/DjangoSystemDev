@@ -13,8 +13,7 @@
         <h1 class="text-2xl font-bold mb-6 text-center items-center">年次受注集計</h1>
         <div class="w-full p-4 rounded-lg flex justify-center space-x-3 items-center">
 
-            <form method="POST" action="" class="flex items-center space-x-3">
-                {% csrf_token %}
+            <form method="GET" action="" class="flex items-center space-x-3">
                 <div>
                     {{ form.query }}
                 </div>
@@ -31,40 +30,42 @@
             </form>
         </div>
             
-        <div class="mx-auto">
+        
 
             {% if orders_by_year %}
                 {% for year, year_data in orders_by_year.items %}
-                <div class="">
-                    <h3>年: {{ year }} - 総受注数: {{ year_data.total_quantity_per_year }} - 総受注金額: {{ year_data.total_price_per_year }}</h3>
-                    <table class="table">
-                        <thead class="bg-gray-700 text-white">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">得意先ID</th>
-                                <th scope="col" class="px-6 py-3">年</th>
-                                <th scope="col" class="px-6 py-3">月</th>
-                                <th scope="col" class="px-6 py-3">受注数</th>
-                                <th scope="col" class="px-6 py-3">受注金額</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-gray-100">
-                            {% for order in year_data.orders %}
-                                <tr class="hover:text-white hover:bg-gray-400">
-                                    <th scope="row" class="px-6 py-4">{{ order.customer_id }}</th>
-                                    <td class="px-6 py-4">{{ order.order_year }}</td>
-                                    <td class="px-6 py-4">{{ order.order_month }}</td>
-                                    <td class="px-6 py-4">{{ order.total_quantity }}</td>
-                                    <td class="px-6 py-4">{{ order.total_price }}</td>
+                <div class="mt-6 text-center">
+                    <div>
+                        <h3>年: {{ year }} - 総受注数: {{ year_data.total_quantity_per_year }} - 総受注金額: {{ year_data.total_price_per_year }}</h3>
+                        <table class="table mx-auto">
+                            <thead class="bg-gray-700 text-white">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">得意先ID</th>
+                                    <th scope="col" class="px-6 py-3">年</th>
+                                    <th scope="col" class="px-6 py-3">月</th>
+                                    <th scope="col" class="px-6 py-3">受注数</th>
+                                    <th scope="col" class="px-6 py-3">受注金額</th>
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="bg-gray-100">
+                                {% for order in year_data.orders %}
+                                    <tr class="hover:text-white hover:bg-gray-400">
+                                        <th scope="row" class="px-6 py-4">{{ order.customer_id }}</th>
+                                        <td class="px-6 py-4">{{ order.order_year }}</td>
+                                        <td class="px-6 py-4">{{ order.order_month }}</td>
+                                        <td class="px-6 py-4">{{ order.total_quantity }}</td>
+                                        <td class="px-6 py-4">{{ order.total_price }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 {% endfor %}
             {% else %}
                 <p class="text-center mt-4">No Data</p>
             {% endif %}
-        </div>
+        
         <div class="text-center mt-6">
             <a href="{% url 'sales-management' %}" class="inline-block bg-gray-600 text-white py-2 px-4 rounded-lg hover:underline text-right">戻る</a>
         </div>
